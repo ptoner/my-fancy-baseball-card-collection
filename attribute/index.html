@@ -1,0 +1,572 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    
+
+    <style>
+    html {
+        visibility: hidden;
+        opacity: 0;
+    }
+    </style>
+
+
+    <title>
+        Attribute Report for My Fancy Baseball Card Collection    </title>
+
+
+    
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, minimum-scale=1, user-scalable=yes, minimal-ui, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+<meta property="og:title" content="Attribute Report for 'My Fancy Baseball Card Collection' NFTs" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="attribute" />
+<meta property="og:image" content="https://ptoner.github.io/my-fancy-baseball-card-collection/backup/export/images/QmaJZf4kWf8FLAti96rnGQpi6eHqtVjzgsZ9QVQn6oVUJt.jpg" />
+<meta property="og:description" content="Attribute Report for 'My Fancy Baseball Card Collection' NFTs" />
+
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content="attribute" />
+<meta property="twitter:title" content="Attribute Report for 'My Fancy Baseball Card Collection' NFTs" />
+<meta property="twitter:description" content="Attribute Report for 'My Fancy Baseball Card Collection' NFTs" />
+<meta property="twitter:image" content="https://ptoner.github.io/my-fancy-baseball-card-collection/backup/export/images/QmaJZf4kWf8FLAti96rnGQpi6eHqtVjzgsZ9QVQn6oVUJt.jpg" />
+
+
+    
+            <script defer src="/my-fancy-baseball-card-collection/large/reader/browser/js/runtime.reader.js?v=0.16.47"></script>
+            <script defer src="/my-fancy-baseball-card-collection/large/reader/browser/js/vendors.reader.js?v=0.16.47"></script>
+            <script defer src="/my-fancy-baseball-card-collection/large/reader/browser/js/main.reader.js?v=0.16.47"></script>
+                
+</head>
+
+<body>
+
+    <div id="app">
+
+        <div class="view view-main">
+
+            <div class="page" data-name="attribute">
+
+                <nav-bar
+                    logo="${logo}"
+                    library_url=""
+                    large_url=""
+                    title="Attribute Report"
+                    active="Attribute Report"
+                    show_mint_page="false"
+                    show_activity_page="false"
+                    breadcrumbs="${breadcrumbs}"
+                >
+                </nav-bar>
+
+
+                <div class="page-content infinite-scroll-content" id="attribute-tokens-infinite-scroll">
+
+                    <div class="row">
+            
+                        <div class="fixed-width-content center">
+
+                            <div class="hidden-on-load">
+
+                                <div class="block-title block-title-large">${traitType} / ${value}</div>
+                            
+                                ${totalTokens > 0 ? $h`
+                                    
+                                    <div class="block block-strong inset stats">
+                            
+    
+                                        <div class="stats-row margin-bottom">
+    
+                                            <div>
+                                                Number of Sales
+                                            </div>
+                    
+                                            <div class="price">
+                                                <strong>${new Intl.NumberFormat('en-US').format(salesReport?.totals?.events ? salesReport?.totals?.events : 0)}</strong>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="stats-row margin-bottom">
+
+                                            <div>
+                                                Average Sale
+                                            </div>
+                    
+                                            <div class="price">
+                                                <strong>${new Intl.NumberFormat('en-US').format(salesReport?.totals?.averageEthValue ? salesReport?.totals?.averageEthValue : 0)}</strong> ETH <span class="dollars">${transactionWebService.abbreviateDollars(salesReport?.totals?.averageUsdValue ? salesReport?.totals?.averageUsdValue : 0, 2)}</span>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="stats-row margin-bottom">
+
+                                            <div>
+                                                Total Value of All Sales
+                                            </div>
+                    
+                                            <div class="price">
+                                                <strong>${new Intl.NumberFormat('en-US').format(salesReport?.totals?.ethValue ? salesReport?.totals?.ethValue : 0)}</strong> ETH <span class="dollars">${transactionWebService.abbreviateDollars(salesReport?.totals?.usdValue ? salesReport?.totals?.usdValue : 0, 2)}</span>
+                                            </div>
+
+                                        </div>
+                                    
+                                    </div>
+    
+                                    ${largestSales && largestSales?.sales?.length > 0 ? $h`
+    
+                                        <div class="block-title block-title-medium">Largest Sales</div>
+                                        <largest-sales largest_sales="${largestSales}"></largest-sales>
+                                        
+                                    ` : $h` `}
+    
+                                    <div class="card data-table">
+                                        <div class="card-header">
+                                            Leaderboard <span class="last-updated">Last updated: ${moment(lastUpdated).fromNow()}</span>
+    
+                                        </div>
+                                        <div class="card-content">
+                  
+                                            <table class="leaderboard-table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Rank</th>
+                                                        <th class="label-cell">Address</th>
+                                                        <th>Last Active</th>
+                                                        <th class="numeric-cell">Owned</th>
+                                                    </tr>
+                                                </thead>
+                                        
+                                                <tbody>
+                                        
+                                                ${owners?.map(u => $h`
+                                                    <tr>
+                                                        <th>${u.rank}</th>
+                                                        <td class="label-cell">
+        
+                                                            ${u.ensName ? $h`
+                                                                <a href="/my-fancy-baseball-card-collection/u/?address=${u._id}">${u.ensName}</a>
+                                                            ` : $h`
+                                                                <a href="/my-fancy-baseball-card-collection/u/?address=${u._id}">${u._id ? walletService.truncateEthAddress(u._id) : ' '}</a>
+                                                            `} 
+        
+                                                        </td>
+                                            
+                                                        <td>
+                                                            ${u.lastActive ? moment(u.lastActive).fromNow() : ""}
+                                                        </td>
+                                            
+                                                        <td class="numeric-cell">
+                                                            ${u.count}
+                                                        </td>
+                                            
+                                                    </tr>
+                                                
+                                                `)}
+                                                </tbody>
+                                    
+                                            </table>
+    
+    
+                                        </div>
+                                    </div>
+    
+                                    <div class="block-title block-title-medium">Minted Tokens (${totalTokens})</div>
+                                    <div class="block list cards-list virtual-list" id="attribute-tokens-list">
+                                        <ul class="item-flex"></ul>
+                                    </div>
+                                  
+                                    <div class="preloader infinite-scroll-preloader"></div>
+
+
+                                ` : $h`
+                                    <div class="block block-strong inset">
+                                        No tokens minted yet.
+                                    </div>
+                                `}
+
+                            
+                            </div>
+
+                            <div class="hide-on-pageinit">
+
+                                <div class="card skeleton-text">
+                                    <div class="card-header">User Info</div>
+                                    <div class="card-content card-content-padding data-table">
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi
+                                        lobortis et massa ac interdum. Cras consequat felis at consequat hendrerit.
+                                    </div>
+
+                                  </div>
+
+                            </div>
+
+                            <br /><br />
+
+                            
+<div class="block block-strong inset">
+
+    <span class="footer-link">
+      <strong>Large NFT</strong> code licensed under <a href="https://github.com/LargeNFT/large-nft/blob/master/LICENSE.md" class="external">MIT</a>
+    </span>
+
+    <span class="footer-link">
+      <a href="https://github.com/LargeNFT/large-nft" class="external">GitHub</a>
+    </span>
+
+    <span class="footer-link">
+      <a href="https://twitter.com/large_nft" class="external">Twitter</a>
+    </span>
+
+</div>
+
+                        </div>
+                    </div>
+            
+                </div>
+              
+            
+            </div>
+
+        </div>
+
+    </div>
+
+    
+    <script type="module" id="page-init-scripts">
+
+        const init = (props, { $, $f7, $h, $on, $update }) => {
+
+            let channelWebService = globalThis.container.get("ChannelWebService")
+
+            let baseURI = globalThis.container.get("baseURI")
+            let hostname = globalThis.container.get("hostname")
+
+            let transactionWebService = globalThis.container.get("TransactionWebService")
+            let processedTransactionService = globalThis.container.get("ProcessedTransactionService")
+            let itemWebService = globalThis.container.get("ItemWebService")
+            let walletService = globalThis.container.get("WalletService")
+
+
+            let logo = JSON.parse(`{}`)
+
+
+            let traitType
+            let value 
+
+            let salesReport
+            let largestSales
+            let owners
+
+
+
+            let virtualList
+
+            let page = 1
+
+            let hasMoreItems = true
+            let loadingInProgress = false
+            let firstPageItems
+
+            let totalTokens
+            let attributeParams = {}
+
+
+            let lastUpdated
+
+            let breadcrumbs = [{
+                text: JSON.parse(`"CARDS"`),
+                path: baseURI()
+            }, {
+                text: "Attributes",
+                path: `${baseURI()}attributes`
+            }]
+
+
+
+            const link = (href) => {
+              return baseURI() + href
+            }   
+
+            const loadSalesReport = async () => {
+                
+                loading = true
+
+                try  {
+
+                    let keyValue = attributeKey.split("::::")
+                    traitType = keyValue[0]
+                    value = keyValue[1]
+
+                    salesReport = await transactionWebService.getAttributeSalesReport(traitType, value)
+
+                    largestSales = {
+                        sales: salesReport?.largestSales,
+                        rowItemViewModels: salesReport.rowItemViewModels
+                    }
+
+
+
+                    owners = salesReport?.owners
+
+
+                    let latest = await transactionWebService.getLatest()
+                    lastUpdated = latest.lastUpdated
+
+
+                    attributeParams[traitType] = value
+
+                    breadcrumbs.push({
+                        text: `${traitType} / ${value}`
+                    })
+
+                    let result = await itemWebService.attributeItemPage(traitType, value, page)
+
+                    firstPageItems = result.items
+                    totalTokens = result.totalMatches
+
+                    await $update()
+
+                    createVirtualList()
+
+
+                } catch(ex) { 
+                    $('.infinite-scroll-preloader').hide()
+                    console.log(ex) 
+                }
+                
+                loading = false
+
+                await $update()
+
+            }
+
+            const createVirtualList = () => {
+
+                virtualList = $f7.virtualList.create({
+                    el: '#attribute-tokens-list',
+                    createUl: false,
+                    renderItem(item) {
+                        return getTemplate(item)
+                    },
+                    height: 287,
+                    items: firstPageItems,                    
+                    cols: getWidth() >= 1024 ? 5 : 2,
+                    emptyTemplate: `
+                        <li class="item-content">
+                            <div class="item-inner">
+                                No results found.
+                            </div>
+                        </li>
+                        `
+                })
+
+                if (virtualList.items?.length < totalTokens) {
+                    hasMoreItems = true
+                    document.getElementById("attribute-tokens-infinite-scroll").addEventListener( 'infinite', infiniteScroll )
+                } else {
+                    hasMoreItems = false
+                    $('.infinite-scroll-preloader').hide()
+                }
+
+            }
+
+            const resizeListener = (e) => {
+
+                const viewPortWidth = getWidth()
+
+                if (virtualList) {
+                    virtualList.params.cols = viewPortWidth >= 1024 ? 5 : 2
+                    virtualList?.update()
+                }
+
+                console.log("Resized...")
+
+            }
+
+            const getWidth = () => {
+                return Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
+            }
+
+            const getTemplate = (rowItemViewModel) => {
+
+                let tokenLink = link('t/' + rowItemViewModel.tokenId)
+                let imgExt = rowItemViewModel.coverImageGenerated ? 'svg' : 'jpg'
+                let imageLink = link('backup/export/images/' + rowItemViewModel.coverImageId + "." + imgExt)
+                let title = rowItemViewModel.title
+
+                return `<li class="flex-card">
+                        <a href="${tokenLink}" class="item-link">
+                            <div class="card" >
+                                <div class="card-content">
+                                    <div class="square">
+                                        <img src="${imageLink}"/>
+                                    </div>
+                                </div>
+
+                                <div class="card-footer">
+                                    ${title}
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+            `
+            
+            }
+
+            async function infiniteScroll(e) {
+
+                // Exit, if loading in progress
+                if (loadingInProgress || !hasMoreItems) return
+
+                console.log(`Infinite scrolling...`)
+
+                // Set loading flag
+                loadingInProgress = true
+                $('.infinite-scroll-preloader').show()
+
+
+                try {
+                    
+                    page++
+
+                    let result = await itemWebService.attributeItemPage(traitType, value, page)
+
+                    // firstPageItems = result.items
+
+                    // let result = await itemWebService.exploreList(attributeParams, virtualList.items?.length, PER_PAGE)
+
+
+                    let items = result.items
+
+                    virtualList.appendItems(items)
+
+                    if (virtualList.items?.length >= totalTokens) {
+                        hasMoreItems = false
+                    }
+
+                } catch (ex) {
+                    hasMoreItems = false
+                    console.log(ex)
+                }
+
+                $f7.preloader.hide()
+                $('.infinite-scroll-preloader').hide()
+
+
+                loadingInProgress = false
+
+
+            }
+
+
+
+
+
+            $on('pageInit', async () => {
+
+                await channelWebService.loadChannel(
+                        "29de1075-7dca-4fb3-8219-82499446e975",
+                        '/my-fancy-baseball-card-collection/',
+                        'https://ptoner.github.io'
+                )
+
+                await $update()
+
+                window.addEventListener('resize', resizeListener)
+
+
+                attributeKey = $f7.views.main.router.currentRoute?.query?.attributeKey
+
+                $('.infinite-scroll-preloader').show()
+
+                await loadSalesReport()
+
+                $('.hidden-on-load').removeClass('hidden-on-load')
+                $('.hide-on-pageinit').hide()
+
+                await $update()
+
+            })
+
+
+            $on('pageReinit', async () => {
+
+                channelWebService.loadChannel(
+                        "29de1075-7dca-4fb3-8219-82499446e975",
+                        '/my-fancy-baseball-card-collection/',
+                        'https://ptoner.github.io'
+                )
+
+                await $update()
+                
+                address = $f7.views.main.router.currentRoute?.query?.address
+
+                await loadSalesReport()
+
+                $('.hide-on-pageinit').hide()
+
+                await $update()
+
+
+            })
+
+            
+
+document.querySelector('meta[property="og:title"]').setAttribute("content", "Attribute Report for 'My Fancy Baseball Card Collection' NFTs")
+document.querySelector('meta[property="og:url"]').setAttribute("content", "attribute")
+document.querySelector('meta[property="og:image"]').setAttribute("content", "https://ptoner.github.io/my-fancy-baseball-card-collection/backup/export/images/QmaJZf4kWf8FLAti96rnGQpi6eHqtVjzgsZ9QVQn6oVUJt.jpg")
+document.querySelector('meta[property="og:description"]').setAttribute("content", "Attribute Report for 'My Fancy Baseball Card Collection' NFTs")
+
+document.querySelector('meta[property="twitter:url"]').setAttribute("content", "attribute")
+document.querySelector('meta[property="twitter:title"]').setAttribute("content", "Attribute Report for 'My Fancy Baseball Card Collection' NFTs")
+document.querySelector('meta[property="twitter:image"]').setAttribute("content", "https://ptoner.github.io/my-fancy-baseball-card-collection/backup/export/images/QmaJZf4kWf8FLAti96rnGQpi6eHqtVjzgsZ9QVQn6oVUJt.jpg")
+document.querySelector('meta[property="twitter:description"]').setAttribute("content", "Attribute Report for 'My Fancy Baseball Card Collection' NFTs" )
+
+
+            document.querySelector('title').innerHTML = "Attribute Report My Fancy Baseball Card Collection"
+
+            $f7.preloader.hide()
+
+            return $render
+
+        }
+
+
+    </script>
+
+    
+
+    <script type="module" id="page-scripts">
+
+        let init = () => {
+
+            let baseURL = '/my-fancy-baseball-card-collection/'
+            let hostname = 'https://ptoner.github.io'
+            let version = atob('IjAuMTYuNDci').replace('"', '').replace('"', '')
+            let channelId = '29de1075-7dca-4fb3-8219-82499446e975'    
+
+            let app = reader.initReader(baseURL, hostname, version, channelId)
+        }
+
+        init()
+
+    
+        
+    </script>
+
+
+    
+
+
+
+
+</body>
+
+</html>

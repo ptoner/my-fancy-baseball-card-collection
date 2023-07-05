@@ -1,0 +1,387 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    
+    
+
+    <style>
+        html {
+            visibility: hidden;
+            opacity: 0;
+        }
+    </style>
+
+    <title>
+        User Activity for My Fancy Baseball Card Collection    </title>
+
+    
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, minimum-scale=1, user-scalable=yes, minimal-ui, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+<meta property="og:title" content="User Activity for My Fancy Baseball Card Collection" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="u/activity" />
+<meta property="og:image" content="https://ptoner.github.io/my-fancy-baseball-card-collection/backup/export/images/QmaJZf4kWf8FLAti96rnGQpi6eHqtVjzgsZ9QVQn6oVUJt.jpg" />
+<meta property="og:description" content="User Activity for My Fancy Baseball Card Collection" />
+
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content="u/activity" />
+<meta property="twitter:title" content="User Activity for My Fancy Baseball Card Collection" />
+<meta property="twitter:description" content="User Activity for My Fancy Baseball Card Collection" />
+<meta property="twitter:image" content="https://ptoner.github.io/my-fancy-baseball-card-collection/backup/export/images/QmaJZf4kWf8FLAti96rnGQpi6eHqtVjzgsZ9QVQn6oVUJt.jpg" />
+
+
+    
+            <script defer src="/my-fancy-baseball-card-collection/large/reader/browser/js/runtime.reader.js?v=0.16.47"></script>
+            <script defer src="/my-fancy-baseball-card-collection/large/reader/browser/js/vendors.reader.js?v=0.16.47"></script>
+            <script defer src="/my-fancy-baseball-card-collection/large/reader/browser/js/main.reader.js?v=0.16.47"></script>
+            
+</head>
+
+<body>
+
+    <div id="app">
+
+        <div class="view view-main">
+
+            <div class="page" data-name="user-activity">
+
+                <nav-bar 
+                    logo="${logo}" 
+                    library_url=""
+                    large_url=""
+                    title="User" 
+                    active="User" 
+                    show_mint_page="false"
+                    show_activity_page="false"
+                    breadcrumbs="${breadcrumbs}"
+                >
+                </nav-bar>
+
+                <div class="page-content">
+
+                    <div class="fixed-width-content center">
+
+                        <div class="hidden-on-load">
+
+                            <div class="block-title block-title-large">Account Details</div>
+                            <div class="block-header">
+                                ${address}
+                            </div>
+
+                            <div class="block">
+
+                                <div class="user-info">
+
+                                    <div class="row">
+                                        <div>Etherscan</div>
+                                        <div >
+                                            <a href="https://etherscan.io/address/${address}" class="item-link external">${address ? walletService.truncateEthAddress(address) : ' '}</a>
+                                        </div>
+                                    </div>
+                            
+                                    ${tokenOwner?.ensName ? $h`
+                                        <div class="row">
+                                            <div>ENS Name</div>
+                                            <div>${tokenOwner?.ensName}</div>
+                                        </div>  
+                                    ` : $h` `}
+                            
+                                    <div class="row">
+                                        <div>Tokens Owned</div>
+                                        <div><strong>${tokenOwner?.count ? tokenOwner.count : 0}</strong></div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div>Transactions</div>
+                                        <div><strong>${tokenOwner?.transactionCount}</strong></div>
+                                    </div>
+
+                            
+                                    <div class="row">
+                                        <div>Rank</div>
+                                        <div><strong>#${tokenOwner?.rank}</strong> (#${tokenOwner?.overallRank} overall)</div>
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="block">
+                                <p class="segmented">
+                                    <a class="button button-outline"
+                                        href="/my-fancy-baseball-card-collection/u/?address=${address}">Owned</a>
+                                    <a class="button button-outline button-active" href="#">Activity</a>
+                                </p>
+                            </div>
+
+                            ${transactionsViewModel?.transactions?.length > 0 ? $h`
+                
+                                <div class="block-title block-title-medium">
+                                    <div class="last-updated">Last updated: ${moment(transactionsViewModel.lastUpdated).fromNow()}</div>
+                                    Activity
+                                </div>
+                                <transaction-row transactions="${transactionsViewModel}" items="${transactionsViewModel.rowItemViewModels}"></transaction-row>
+                         
+                                <div class="block split-row-both">
+                                    <div>
+                                        ${previousPage ? $h`
+                                            <a href="${baseURI()}u/activity?page=${previousPage}&address=${address}" class="button button-outline color-gray">Previous</a>
+                                            ` : $h` `}
+                                    </div>
+                                    <div>
+                                        ${nextPage ? $h`
+                                            <a href="${baseURI()}u/activity?page=${nextPage}&address=${address}" class="button button-fill">Next</a>
+                                            ` : $h` `}
+                                    </div>
+                            
+                                </div>
+
+    
+                            ` : $h`<span />`}
+
+                        </div>
+
+                        
+                        <div class="hide-on-pageinit">
+
+                            <div class="card skeleton-text">
+                                <div class="card-header">Activity</div>
+                                <div class="card-content card-content-padding data-table">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi
+                                    lobortis et massa ac interdum. Cras consequat felis at consequat hendrerit.
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        
+<div class="block block-strong inset">
+
+    <span class="footer-link">
+      <strong>Large NFT</strong> code licensed under <a href="https://github.com/LargeNFT/large-nft/blob/master/LICENSE.md" class="external">MIT</a>
+    </span>
+
+    <span class="footer-link">
+      <a href="https://github.com/LargeNFT/large-nft" class="external">GitHub</a>
+    </span>
+
+    <span class="footer-link">
+      <a href="https://twitter.com/large_nft" class="external">Twitter</a>
+    </span>
+
+</div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    
+    <script type="module" id="page-init-scripts">
+
+
+
+
+        const init = (props, { $, $f7, $h, $on, $update }) => {
+
+            let channelWebService = globalThis.container.get("ChannelWebService")            
+            let baseURI = globalThis.container.get("baseURI")
+            let hostname = globalThis.container.get("hostname")
+            
+            let transactionWebService = globalThis.container.get("TransactionWebService")
+            let tokenOwnerService = globalThis.container.get("TokenOwnerService")
+            let walletService = globalThis.container.get("WalletService")
+
+            let tokenOwner
+            let transactionsViewModel
+
+            let display = 25
+            let address 
+            let page
+
+            let nextPage
+            let previousPage
+
+            let logo = JSON.parse(`{}`)
+
+            let breadcrumbs = [{
+                text: JSON.parse(`"CARDS"`),
+                path: baseURI()
+            }, {
+                text: "Leaderboard",
+                path: `${baseURI()}leaderboard`
+            }]
+            
+
+            const loadActivity = async () => {
+
+                loading = true
+
+                try  {
+
+                    nextPage = undefined
+                    previousPage = undefined
+
+                    if ($f7.views.main.router.currentRoute?.query?.address) {
+                        address = $f7.views.main.router.currentRoute?.query?.address
+                    }
+
+                    if ($f7.views.main.router.currentRoute?.query?.page) {
+                        page = $f7.views.main.router.currentRoute?.query?.page
+
+                        if (page) {
+                            page = parseInt(page)
+                        } 
+                    }
+
+                    if (!page) {
+                        page = 1
+                    }
+
+
+
+
+                    tokenOwner = await tokenOwnerService.get(address)
+
+                    transactionsViewModel = await transactionWebService.listByAddress(address, page)
+
+
+                    breadcrumbs.push({
+                        text: address,
+                        path: `${baseURI()}u?address=${address}`
+                    })
+
+                    breadcrumbs.push({
+                        text: `Page ${page}`
+                    })
+
+                    if (page > 1) {
+                        previousPage = page - 1
+                    } 
+
+                    if (page < tokenOwner.totalTransactionPages) {
+                        nextPage = page + 1
+                    }
+
+
+
+                } catch(ex) { console.log(ex) }
+
+                $('.hidden-on-load').removeClass('hidden-on-load')
+
+
+                loading = false
+
+                await $update()
+
+
+            }
+
+            $on('pageInit', async () => {
+
+                await channelWebService.loadChannel(
+                        "29de1075-7dca-4fb3-8219-82499446e975",
+                        '/my-fancy-baseball-card-collection/',
+                        'https://ptoner.github.io'
+                )
+
+                await $update()
+
+                await loadActivity()
+
+                $('.hide-on-pageinit').hide()
+
+                await $update()
+
+            })
+
+            $on('pageReinit', async () => {
+
+
+                await channelWebService.loadChannel(
+                        "29de1075-7dca-4fb3-8219-82499446e975",
+                        '/my-fancy-baseball-card-collection/',
+                        'https://ptoner.github.io'
+                )
+
+                await $update()
+
+
+                await loadActivity()
+
+                //Dispatch event so we can refresh list
+                let ev = new CustomEvent('transactions-updated')
+                ev.transactionsViewModel = transactionsViewModel
+                document.dispatchEvent(ev)
+
+                $('.hide-on-pageinit').hide()
+
+            })
+
+            
+
+document.querySelector('meta[property="og:title"]').setAttribute("content", "User Activity for My Fancy Baseball Card Collection")
+document.querySelector('meta[property="og:url"]').setAttribute("content", "u/activity")
+document.querySelector('meta[property="og:image"]').setAttribute("content", "https://ptoner.github.io/my-fancy-baseball-card-collection/backup/export/images/QmaJZf4kWf8FLAti96rnGQpi6eHqtVjzgsZ9QVQn6oVUJt.jpg")
+document.querySelector('meta[property="og:description"]').setAttribute("content", "User Activity for My Fancy Baseball Card Collection")
+
+document.querySelector('meta[property="twitter:url"]').setAttribute("content", "u/activity")
+document.querySelector('meta[property="twitter:title"]').setAttribute("content", "User Activity for My Fancy Baseball Card Collection")
+document.querySelector('meta[property="twitter:image"]').setAttribute("content", "https://ptoner.github.io/my-fancy-baseball-card-collection/backup/export/images/QmaJZf4kWf8FLAti96rnGQpi6eHqtVjzgsZ9QVQn6oVUJt.jpg")
+document.querySelector('meta[property="twitter:description"]').setAttribute("content", "User Activity for My Fancy Baseball Card Collection" )
+
+            document.querySelector('title').innerHTML = "User Activity My Fancy Baseball Card Collection"
+
+            $f7.preloader.hide()
+
+            return $render
+
+        }
+
+
+    </script>
+
+    
+
+    <script type="module" id="page-scripts">
+
+        let init = () => {
+
+            let baseURL = '/my-fancy-baseball-card-collection/'
+            let hostname = 'https://ptoner.github.io'
+            let version = atob('IjAuMTYuNDci').replace('"', '').replace('"', '')
+            let channelId = '29de1075-7dca-4fb3-8219-82499446e975'    
+
+            let app = reader.initReader(baseURL, hostname, version, channelId)
+        }
+
+        init()
+
+    
+        
+    </script>
+
+
+    
+
+
+
+
+</body>
+
+</html>
