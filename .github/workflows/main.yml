@@ -1,0 +1,55 @@
+name: Docker Command on Commit
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - '.upload/**'
+
+permissions: write-all
+
+jobs:
+  docker_command:
+    runs-on: ubuntu-latest
+
+    if: "contains(github.event.head_commit.message, 'complete')"
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Build and run Docker container
+        id: docker_command
+        run: |
+
+            wget https://dist.ipfs.tech/kubo/v0.20.0/kubo_v0.20.0_linux-amd64.tar.gz
+            tar -xvzf kubo_v0.20.0_linux-amd64.tar.gz
+            cd kubo
+            ./install.sh
+            cd ..
+
+            ipfs init
+            ipfs daemon & 
+
+            npm install
+            npm run publish
+            npm run generate
+
+            rm kubo_v0.20.0_linux-amd64.tar.gz
+            rm -r kubo
+
+            git config --global user.name "GitHub Actions"
+            git config --global user.email "actions@github.com"
+
+            git add --all
+            git commit -m "Update IPFS CAR and JSON files" || echo "No changes to commit"
+
+            git push
+
+
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@4.1.0
+        with:
+          branch: gh-pages
+          folder: public
