@@ -1,0 +1,158 @@
+
+<!DOCTYPE html>
+<html>
+
+  <head>
+
+    
+
+    <style>
+      html {
+        visibility: hidden;
+        opacity: 0;
+      }
+    </style>
+
+    <!-- Required meta tags-->
+    <meta charset="utf-8">
+    <meta name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- Color theme for statusbar -->
+    <title>
+      404 Page Not Found
+    </title>
+
+
+    
+            <script defer src="/my-fancy-baseball-card-collection/large/reader/browser/js/runtime.reader.js?v=0.16.47"></script>
+            <script defer src="/my-fancy-baseball-card-collection/large/reader/browser/js/vendors.reader.js?v=0.16.47"></script>
+            <script defer src="/my-fancy-baseball-card-collection/large/reader/browser/js/main.reader.js?v=0.16.47"></script>
+                
+
+  </head>
+
+  <body>
+
+    <div id="app">
+
+      <div class="view view-main">
+
+        <div class="page" data-name="home">
+
+          <nav-bar
+            logo="${logo}"
+            library_url=""
+            large_url=""
+            title="My Fancy Baseball Card Collection"
+            show_mint_page="false"
+            show_activity_page="false"
+          >
+          </nav-bar>
+
+          
+
+
+          <div class="page-content">
+
+            <div class="row">
+
+              <div class="col-100 large-75">
+
+
+                <div class="block block-strong inset col-100 no-margin-bottom">
+                  <div class="breadcrumbs ">
+                    <div class="breadcrumbs-item breadcrumbs-item-active">
+                      Home
+                    </div> 
+                  </div>
+                </div>
+
+
+                <div class="card">
+
+                  <div class="card-content card-content-padding">
+                    404 Page not found.
+                  </div>
+
+                </div>
+
+              </div>
+
+              <div class="col-100 large-25">                
+
+
+
+              </div>
+              
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+        
+    <script type="module" id="page-init-scripts">
+
+      const init = (props, { $, $f7, $h, $on, $update }) => {
+              
+
+            let channelWebService = globalThis.container.get("ChannelWebService")
+            let baseURI = globalThis.container.get("baseURI")
+            let hostname = globalThis.container.get("hostname")
+
+            let logo = JSON.parse(`{}`)
+
+
+            $on('pageInit', async () => {
+
+              await channelWebService.loadChannel(
+                      "29de1075-7dca-4fb3-8219-82499446e975",
+                      '/my-fancy-baseball-card-collection/',
+                      'https://ptoner.github.io'
+              )
+
+
+            })
+
+            $f7.preloader.hide()
+
+            return $render;
+      }
+
+
+    </script>
+
+    
+
+    <script type="module" id="page-scripts">
+
+        let init = () => {
+
+            let baseURL = '/my-fancy-baseball-card-collection/'
+            let hostname = 'https://ptoner.github.io'
+            let version = atob('IjAuMTYuNDci').replace('"', '').replace('"', '')
+            let channelId = '29de1075-7dca-4fb3-8219-82499446e975'    
+
+            let app = reader.initReader(baseURL, hostname, version, channelId)
+        }
+
+        init()
+
+    
+        
+    </script>
+
+
+    
+
+
+
+
+  </body>
+
+</html>

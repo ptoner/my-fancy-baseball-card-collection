@@ -1,0 +1,278 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    
+
+    <style>
+    html {
+        visibility: hidden;
+        opacity: 0;
+    }
+    </style>
+
+
+    <title>
+        Largest Sales for My Fancy Baseball Card Collection    </title>
+
+    
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, minimum-scale=1, user-scalable=yes, minimal-ui, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+<meta property="og:title" content="Largest Sales for 'My Fancy Baseball Card Collection' NFTs" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="largest-sales" />
+<meta property="og:image" content="https://ptoner.github.io/my-fancy-baseball-card-collection/backup/export/images/QmaJZf4kWf8FLAti96rnGQpi6eHqtVjzgsZ9QVQn6oVUJt.jpg" />
+<meta property="og:description" content="Largest Sales for 'My Fancy Baseball Card Collection' NFTs" />
+
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content="largest-sales" />
+<meta property="twitter:title" content="Largest Sales for 'My Fancy Baseball Card Collection' NFTs" />
+<meta property="twitter:description" content="Largest Sales for 'My Fancy Baseball Card Collection' NFTs" />
+<meta property="twitter:image" content="https://ptoner.github.io/my-fancy-baseball-card-collection/backup/export/images/QmaJZf4kWf8FLAti96rnGQpi6eHqtVjzgsZ9QVQn6oVUJt.jpg" />
+
+    
+            <script defer src="/my-fancy-baseball-card-collection/large/reader/browser/js/runtime.reader.js?v=0.16.47"></script>
+            <script defer src="/my-fancy-baseball-card-collection/large/reader/browser/js/vendors.reader.js?v=0.16.47"></script>
+            <script defer src="/my-fancy-baseball-card-collection/large/reader/browser/js/main.reader.js?v=0.16.47"></script>
+                
+</head>
+
+<body>
+
+    <div id="app">
+
+        <div class="view view-main">
+
+            <div class="page" data-name="largest-sales">
+
+                <nav-bar
+                    logo="${logo}"
+                    library_url=""
+                    large_url=""
+                    title="Largest Sales"
+                    active="Largest Sales"
+                    show_mint_page="false"
+                    show_activity_page="false"
+                    breadcrumbs="${breadcrumbs}"
+                >
+                </nav-bar>
+
+
+                <div class="page-content">
+
+                    <div class="row">
+            
+                        <div class="fixed-width-content center">
+                            
+                            <div class="hidden-on-load">
+
+                                ${largestSales?.sales?.length > 0 ? $h`
+                                    <div class="block-title block-title-medium">Largest Sales</div>
+                                    <div class="block block-strong inset largest-sales">
+                                      
+                                        ${largestSales?.sales?.map( (sale, index) => $h`
+                                            <div class="margin-bottom">
+                    
+                                              <div class="rank">#${index+1}</div>
+                    
+                                              <div class="square">
+                                                <a href="${link(`t/${sale.tokenId}`)}" class="item-link">
+                                                  <img src="${link(`backup/export/images/${largestSales.rowItemViewModels[sale.tokenId].coverImageId}.${largestSales.rowItemViewModels[sale.tokenId].coverImageGenerated ? 'svg' : 'jpg'}`)}" alt="${sale.tokenId}" height="125" width="125"/>
+                                                </a>
+                                              </div>
+                    
+                                              <div class="sale-info margin-top">
+                                                <a href="${link(`t/${sale.tokenId}`)}" class="item-link">${largestSales.rowItemViewModels[sale.tokenId].title}</a><br />
+                                                ${new Intl.NumberFormat('en-US').format(sale.ethValue)} ETH (${transactionWebService.abbreviateDollars(sale.usdValue, 2)})
+                                                <div class="date">${moment(sale.date).format('LL')}</div>
+                    
+                    
+                                              </div>
+                    
+                                            </div>
+                                          `)}
+                  
+                                    </div>
+                                ` : $h` `}
+
+
+                            </div>
+
+
+                            <div class="hide-on-pageinit">
+
+                                <div class="card skeleton-text">
+                                    <div class="card-header">Leaderboard</div>
+                                    <div class="card-content card-content-padding data-table">
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi
+                                        lobortis et massa ac interdum. Cras consequat felis at consequat hendrerit.
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            
+<div class="block block-strong inset">
+
+    <span class="footer-link">
+      <strong>Large NFT</strong> code licensed under <a href="https://github.com/LargeNFT/large-nft/blob/master/LICENSE.md" class="external">MIT</a>
+    </span>
+
+    <span class="footer-link">
+      <a href="https://github.com/LargeNFT/large-nft" class="external">GitHub</a>
+    </span>
+
+    <span class="footer-link">
+      <a href="https://twitter.com/large_nft" class="external">Twitter</a>
+    </span>
+
+</div>
+
+                        </div>
+                    </div>
+            
+                </div>
+              
+            
+            </div>
+
+        </div>
+
+    </div>
+
+    
+    <script type="module" id="page-init-scripts">
+
+        const init = (props, { $, $f7, $h, $on, $update }) => {
+
+
+            let channelWebService = globalThis.container.get("ChannelWebService")
+            let baseURI = globalThis.container.get("baseURI")
+            let hostname = globalThis.container.get("hostname")
+
+            let transactionWebService = globalThis.container.get("TransactionWebService")
+
+            let walletService = globalThis.container.get("WalletService")
+            let moment = globalThis.moment 
+
+            let breadcrumbs = [{
+                text: JSON.parse(`"CARDS"`),
+                path: baseURI()
+            }, {
+                text: "Largest Sales",
+                path: `${baseURI()}sales`
+            }]
+
+            let logo = JSON.parse(`{}`)
+
+
+            let largestSales
+
+            let lastUpdated
+
+            const link = (href) => {
+              return baseURI() + href
+            }   
+
+
+            const loadLargestSales = async () => {
+            
+                loading = true
+
+                try  {
+                    largestSales = await transactionWebService.getLargestSales(100)
+
+                    let latest = await transactionWebService.getLatest()
+
+                    lastUpdated = latest.lastUpdated
+
+                } catch(ex) { console.log(ex) }
+                
+                $('.hidden-on-load').removeClass('hidden-on-load')
+
+
+                loading = false
+
+                await $update()
+
+            }
+
+
+            $on('pageInit', async () => {
+
+                await channelWebService.loadChannel(
+                        "29de1075-7dca-4fb3-8219-82499446e975",
+                        '/my-fancy-baseball-card-collection/',
+                        'https://ptoner.github.io'
+                )
+
+                await $update()
+
+                await loadLargestSales()
+
+                $('.hide-on-pageinit').hide()
+
+                await $update()
+
+
+            })
+
+            
+
+document.querySelector('meta[property="og:title"]').setAttribute("content", "Largest Sales for 'My Fancy Baseball Card Collection' NFTs")
+document.querySelector('meta[property="og:url"]').setAttribute("content", "largest-sales")
+document.querySelector('meta[property="og:image"]').setAttribute("content", "https://ptoner.github.io/my-fancy-baseball-card-collection/backup/export/images/QmaJZf4kWf8FLAti96rnGQpi6eHqtVjzgsZ9QVQn6oVUJt.jpg")
+document.querySelector('meta[property="og:description"]').setAttribute("content", "Largest Sales for 'My Fancy Baseball Card Collection' NFTs")
+
+document.querySelector('meta[property="twitter:url"]').setAttribute("content", "largest-sales")
+document.querySelector('meta[property="twitter:title"]').setAttribute("content", "Largest Sales for 'My Fancy Baseball Card Collection' NFTs")
+document.querySelector('meta[property="twitter:image"]').setAttribute("content", "https://ptoner.github.io/my-fancy-baseball-card-collection/backup/export/images/QmaJZf4kWf8FLAti96rnGQpi6eHqtVjzgsZ9QVQn6oVUJt.jpg")
+document.querySelector('meta[property="twitter:description"]').setAttribute("content", "Largest Sales for 'My Fancy Baseball Card Collection' NFTs" )
+
+            document.querySelector('title').innerHTML = "Largest Sales My Fancy Baseball Card Collection"
+
+            $f7.preloader.hide()
+
+            return $render
+
+        }
+
+
+    </script>
+
+    
+
+    <script type="module" id="page-scripts">
+
+        let init = () => {
+
+            let baseURL = '/my-fancy-baseball-card-collection/'
+            let hostname = 'https://ptoner.github.io'
+            let version = atob('IjAuMTYuNDci').replace('"', '').replace('"', '')
+            let channelId = '29de1075-7dca-4fb3-8219-82499446e975'    
+
+            let app = reader.initReader(baseURL, hostname, version, channelId)
+        }
+
+        init()
+
+    
+        
+    </script>
+
+
+    
+
+
+
+
+</body>
+
+</html>

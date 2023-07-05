@@ -1,0 +1,460 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    
+
+    <style>
+    html {
+        visibility: hidden;
+        opacity: 0;
+    }
+    </style>
+
+
+    <title>
+        Explore My Fancy Baseball Card Collection    </title>
+
+    
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, minimum-scale=1, user-scalable=yes, minimal-ui, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+<meta property="og:title" content="Explore 'My Fancy Baseball Card Collection' NFTs" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="explore.html" />
+<meta property="og:image" content="https://ptoner.github.io/my-fancy-baseball-card-collection/backup/export/images/QmaJZf4kWf8FLAti96rnGQpi6eHqtVjzgsZ9QVQn6oVUJt.jpg" />
+<meta property="og:description" content="Here are 10 cards from my sweet baseball card collection. All cards have been deemed as awesome by the proper baseball card regulatory offices." />
+
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content="explore.html" />
+<meta property="twitter:title" content="Explore 'My Fancy Baseball Card Collection' NFTs" />
+<meta property="twitter:description" content="Here are 10 cards from my sweet baseball card collection. All cards have been deemed as awesome by the proper baseball card regulatory offices." />
+<meta property="twitter:image" content="https://ptoner.github.io/my-fancy-baseball-card-collection/backup/export/images/QmaJZf4kWf8FLAti96rnGQpi6eHqtVjzgsZ9QVQn6oVUJt.jpg" />
+    
+            <script defer src="/my-fancy-baseball-card-collection/large/reader/browser/js/runtime.reader.js?v=0.16.47"></script>
+            <script defer src="/my-fancy-baseball-card-collection/large/reader/browser/js/vendors.reader.js?v=0.16.47"></script>
+            <script defer src="/my-fancy-baseball-card-collection/large/reader/browser/js/main.reader.js?v=0.16.47"></script>
+                
+</head>
+
+<body>
+
+    <div id="app">
+
+        <div class="view view-main">
+
+
+
+            <div class="page" data-name="explore">
+
+                <nav-bar
+                    logo="${logo}"
+                    library_url=""
+                    large_url=""
+                    title="Explore"
+                    active="Explore"
+                    show_mint_page="false"
+                    show_activity_page="false"
+                    breadcrumbs="${breadcrumbs}"
+                >
+                </nav-bar>
+
+
+                <div class="page-content infinite-scroll-content" id="explore-infinite-scroll">
+
+                    <div class="row">
+            
+                        <div class="fixed-width-content center">
+ 
+                            <div class="block">
+                                <attribute-filter 
+                                    baseurl="/my-fancy-baseball-card-collection/"
+                                >
+                                </attribute-filter>
+                            </div>
+
+                            <explore-total-info 
+                                baseurl="/my-fancy-baseball-card-collection/"
+                            >
+                            </explore-total-info>
+
+                            <div class="list cards-list virtual-list" id="explore-list">
+                                <ul class="item-flex"></ul>
+                            </div>
+                          
+                            <div class="preloader infinite-scroll-preloader"></div>
+  
+                        </div>
+                    </div>
+            
+                </div>
+              
+            
+            </div>
+
+        </div>
+
+    </div>
+
+    
+    <script type="module" id="page-init-scripts">
+
+        const init = (props, { $, $f7, $h, $on, $update }) => {
+
+            let channelWebService = globalThis.container.get("ChannelWebService")
+            
+            let baseURI = globalThis.container.get("baseURI")
+            let hostname = globalThis.container.get("hostname")
+
+
+            let itemWebService = globalThis.container.get("ItemWebService")
+            let componentStateService = globalThis.container.get("ComponentStateService")
+
+            const ComponentState = globalThis.ComponentState
+
+            let totalItemCount = parseInt('4')
+
+            let firstPageExploreItems = JSON.parse('[{"_id":"224ff675-3a3d-4c38-a7aa-eaead9462e0c","coverImageGenerated":false,"coverImageId":"QmYSLThbz2Sk3dNHaoPkUUYv8Rv8QzU2F9Xd4RaTz13mYp","title":"1909–11 Honus Wagner T206","tokenId":1},{"_id":"253ee5a6-2189-4460-8f07-99600ad5b308","coverImageGenerated":false,"coverImageId":"QmYjTWUJZcMbJSY8cAo5eqDkM8yNpfvyMejnhyM7nNKHFm","title":"1909–11 Eddie Plank T206","tokenId":2},{"_id":"e4bfb235-13cf-40a6-93c3-dc9865797aa7","coverImageGenerated":false,"coverImageId":"QmRKH5CYNTVStsBA9UXLt3f3a9WA4Qa8TWGQDtYyT2fgsV","title":"1916 Babe Ruth M101-5 Sporting News (blank back)","tokenId":3},{"_id":"26ecd7bd-b375-468b-9e3f-b2dd93c6564c","coverImageGenerated":false,"coverImageId":"QmXGvTP3HDic5t57kGDfBvc3QZnM66aSRh2fAmzYxhEeGw","title":"1951 Mickey Mantle Bowman","tokenId":4}]')
+
+            const PER_PAGE = firstPageExploreItems.length //35
+            const COMPONENT_NAME = "explore"
+
+            let logo = JSON.parse(`{}`)
+
+            let breadcrumbs = [{
+                text: JSON.parse(`"CARDS"`),
+                path: baseURI()
+            }, {
+                text: "Explore"
+            }]
+
+            let state
+
+            let attributeOptions
+
+
+
+            let virtualList
+
+
+            const resizeListener = (e) => {
+                const viewPortWidth = getWidth()
+
+                if (virtualList) {
+                    virtualList.params.cols = viewPortWidth >= 1024 ? 5 : 2
+                    virtualList?.update()
+                }
+
+
+                console.log("Resized...")
+
+            }
+
+            const getWidth = () => {
+                return Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
+            }
+
+
+
+            $on('pageInit', async () => {
+
+                await channelWebService.loadChannel(
+                    "29de1075-7dca-4fb3-8219-82499446e975",
+                    '/my-fancy-baseball-card-collection/',
+                    'https://ptoner.github.io'
+                )
+
+                await channelWebService.loadChannelData("29de1075-7dca-4fb3-8219-82499446e975")
+
+                await $update()
+
+
+                window.addEventListener('resize', resizeListener)
+
+                //Check for existing component state
+                try {
+                    state = await componentStateService.get(COMPONENT_NAME)
+                } catch(ex) {}
+
+                //Initialize state
+                if (!state) {
+
+                    state = Object.assign(new ComponentState(), {
+                        _id: COMPONENT_NAME,
+                        data: {
+                            hasMoreItems: firstPageExploreItems.length < totalItemCount,
+                            loadingInProgress: false,
+                            itemResults: {
+                                items: firstPageExploreItems,
+                                totalMatches: totalItemCount,
+                                limit: PER_PAGE,
+                                skip: 0
+                            },
+                            virtualListItems: firstPageExploreItems,
+                            attributeParams: undefined,
+                        }
+                    })
+
+                }
+
+                attributeOptions = await itemWebService.getExploreAttributeOptions(state.data.attributeParams ? state.data.attributeParams : {})
+
+                await initMain()
+
+                //Save new state
+                try {
+                    await componentStateService.put(state)
+                } catch(ex) {
+                    console.log(ex)
+                }
+
+
+                //Dispatch event so we can update attributes
+                let e = new CustomEvent('attribute-options-loaded')
+                e.attributeOptions = attributeOptions
+                e.attributeParams = state.data.attributeParams
+                document.dispatchEvent(e)
+
+
+                let e2 = new CustomEvent('explore-total-info-changed')
+                e2.totalItems = totalItemCount
+                e2.totalMatches = state.data.itemResults.totalMatches
+                document.dispatchEvent(e2)
+            })
+
+
+            const initMain = async () => {
+
+                $('.infinite-scroll-preloader').show()
+
+                virtualList = $f7.virtualList.create({
+                    el: '#explore-list',
+                    createUl: false,
+                    renderItem(item) {
+                        return getTemplate(item)
+                    },
+                    height: 287,
+                    items: state.data?.virtualListItems,                    
+                    cols: getWidth() >= 1024 ? 5 : 2,
+                    emptyTemplate: `
+                        <li class="item-content">
+                            <div class="item-inner">
+                                No results found.
+                            </div>
+                        </li>
+                        `
+                })
+
+                // $f7.infiniteScroll.create('#explore-infinite-scroll')
+
+                if (virtualList.items?.length < state.data.itemResults.totalMatches) {
+
+                    state.data.hasMoreItems = true
+                    $('#explore-infinite-scroll').on( 'infinite', infiniteScroll )
+
+                } else {
+
+                    state.data.hasMoreItems = false
+                    $('.infinite-scroll-preloader').hide()
+
+                }
+
+
+
+                await $update()
+
+                $f7.preloader.hide()
+                $('.infinite-scroll-preloader').hide()
+
+            }
+
+
+
+            $on('pageBeforeOut', async () => {
+
+                window.removeEventListener('resize', resizeListener)
+                
+            })
+
+
+
+            async function infiniteScroll(e) {
+
+                // Exit, if loading in progress
+                if (state.data.loadingInProgress || !state.data.hasMoreItems) return
+
+                console.log(`Infinite scrolling...`)
+
+                // Set loading flag
+                state.data.loadingInProgress = true
+                $('.infinite-scroll-preloader').show()
+
+
+                try {
+                    
+                    state.data.itemResults = await itemWebService.exploreList(state.data.attributeParams, state.data.virtualListItems?.length, PER_PAGE)
+
+                    virtualList.appendItems(state.data.itemResults.items)
+
+                    //Save a reference in the state
+                    state.data.virtualListItems = virtualList.items
+
+                    if (state.data.virtualListItems?.length >= state.data.itemResults.totalMatches) {
+                        state.data.hasMoreItems = false
+                    }
+
+
+                } catch (ex) {
+                    console.log(ex)
+                }
+
+                $f7.preloader.hide()
+                $('.infinite-scroll-preloader').hide()
+
+
+                state.data.loadingInProgress = false
+                
+                //Save new state
+                try {
+                    await componentStateService.put(state)
+                } catch(ex) {
+                    console.log(ex)
+                }
+
+            }
+
+            function getTemplate(rowItemViewModel) {
+                
+                let tokenLink = link('t/' + rowItemViewModel.tokenId)
+                let imgExt = rowItemViewModel.coverImageGenerated ? 'svg' : 'jpg'
+                let imageLink = link('backup/export/images/' + rowItemViewModel.coverImageId + "." + imgExt)
+                let title = rowItemViewModel.title
+
+                return `<li class="flex-card">
+                            <a href="${tokenLink}" class="item-link">
+                                <div class="card" >
+                                    <div class="card-content">
+                                        <div class="square">
+                                            <img src="${imageLink}"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="card-footer">
+                                        ${title}
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                `
+            }
+
+            const link = (href) => {
+                return `${baseURI() + href}`
+            } 
+
+ 
+            document.addEventListener('explore-attribute-filter-changed', async (e) => {
+
+                //Reset
+                state.data.hasMoreItems = true
+                state.data.loadingInProgress = false
+                state.data.itemResults = undefined
+                state.data.attributeParams = e.attributeParams
+                state.data.virtualListItems = undefined
+
+                //Kill existing list
+                virtualList.destroy()
+
+                //Get first page with 
+                $f7.preloader.show()
+
+                state.data.itemResults = await itemWebService.exploreList(state.data.attributeParams, 0, PER_PAGE)
+                state.data.virtualListItems = state.data.itemResults.items
+
+                //Reset options/counts
+                attributeOptions = await itemWebService.getExploreAttributeOptions(state.data.attributeParams)
+
+
+                //Dispatch event so we can update the explore info
+                let e2 = new CustomEvent('explore-total-info-changed')
+                e2.totalItems = totalItemCount
+                e2.totalMatches = state.data.itemResults.totalMatches
+                document.dispatchEvent(e2)
+
+                //Dispatch event so we can update attribute counts
+                let e3 = new CustomEvent('attribute-options-loaded')
+                e3.attributeOptions = attributeOptions
+                e3.attributeParams = state.data.attributeParams
+                document.dispatchEvent(e3)
+
+                //Add to items
+                await initMain()
+
+                
+                //Save new state
+                try {
+                    await componentStateService.put(state)
+                } catch(ex) {
+                    console.log(ex)
+                }
+
+
+            })
+
+            
+
+document.querySelector('meta[property="og:title"]').setAttribute("content", "Explore 'My Fancy Baseball Card Collection' NFTs")
+document.querySelector('meta[property="og:url"]').setAttribute("content", "explore.html")
+document.querySelector('meta[property="og:image"]').setAttribute("content", "https://ptoner.github.io/my-fancy-baseball-card-collection/backup/export/images/QmaJZf4kWf8FLAti96rnGQpi6eHqtVjzgsZ9QVQn6oVUJt.jpg")
+document.querySelector('meta[property="og:description"]').setAttribute("content", "Here are 10 cards from my sweet baseball card collection. All cards have been deemed as awesome by the proper baseball card regulatory offices.")
+
+document.querySelector('meta[property="twitter:url"]').setAttribute("content", "explore.html")
+document.querySelector('meta[property="twitter:title"]').setAttribute("content", "Explore 'My Fancy Baseball Card Collection' NFTs")
+document.querySelector('meta[property="twitter:image"]').setAttribute("content", "https://ptoner.github.io/my-fancy-baseball-card-collection/backup/export/images/QmaJZf4kWf8FLAti96rnGQpi6eHqtVjzgsZ9QVQn6oVUJt.jpg")
+document.querySelector('meta[property="twitter:description"]').setAttribute("content", "Here are 10 cards from my sweet baseball card collection. All cards have been deemed as awesome by the proper baseball card regulatory offices." )
+
+            document.querySelector('title').innerHTML = "Explore My Fancy Baseball Card Collection"
+
+            $f7.preloader.hide()
+
+            return $render
+
+        }
+
+
+    </script>
+
+    
+
+    <script type="module" id="page-scripts">
+
+        let init = () => {
+
+            let baseURL = '/my-fancy-baseball-card-collection/'
+            let hostname = 'https://ptoner.github.io'
+            let version = atob('IjAuMTYuNDci').replace('"', '').replace('"', '')
+            let channelId = '29de1075-7dca-4fb3-8219-82499446e975'    
+
+            let app = reader.initReader(baseURL, hostname, version, channelId)
+        }
+
+        init()
+
+    
+        
+    </script>
+
+
+    
+
+
+
+
+</body>
+
+</html>
